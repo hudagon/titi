@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gửi TiTi</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,700;1,400&family=Satisfy&display=swap"
+    rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    :root {
+      --wine-red: #722f37;
+      --deep-red: #4a0e0e;
+      --gold: #c5a059;
+      --dark-black: #0a0a0a;
+    }
+
+    body {
+      background-color: var(--dark-black);
+      color: #e0e0e0;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      /* Tránh nội dung bị che khuất bởi dock trên mobile */
+      padding-bottom: 120px;
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding-bottom: 0;
+      }
+    }
+
+    .bg-animate {
+      background: radial-gradient(circle at center, #321014 0%, #0a0a0a 100%);
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+    }
+
+    /* Khung ảnh phong cách Ada Wong */
+    .photo-frame {
+      position: relative;
+      border: 1px solid var(--wine-red);
+      padding: 10px;
+      background: rgba(114, 47, 55, 0.05);
+      transition: all 0.5s ease;
+      box-shadow: 0 0 30px rgba(114, 47, 55, 0.3);
+    }
+
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border: 1px solid var(--gold);
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    /* Hiệu ứng Dock cho Mobile/Tablet */
+    .info-dock {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(15, 5, 6, 0.85);
+      backdrop-filter: blur(15px);
+      border-top: 1px solid rgba(197, 160, 89, 0.3);
+      padding: 20px;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Trở lại bình thường trên Desktop */
+    @media (min-width: 1024px) {
+      .info-dock {
+        position: relative;
+        background: rgba(26, 10, 12, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        margin-top: 80px;
+        padding: 40px;
+        max-width: 60vw;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .timer-box {
+      background: rgba(20, 20, 20, 0.6);
+      backdrop-filter: blur(5px);
+      border-bottom: 2px solid var(--wine-red);
+      transition: all 0.3s ease;
+    }
+
+    .special-font {
+      font-family: 'Cinzel', serif;
+    }
+
+    .handwriting {
+      font-family: 'Satisfy', cursive;
+    }
+
+    .serif-font {
+      font-family: 'Playfair Display', serif;
+    }
+
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .fade-text {
+      transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+    }
+
+    .fade-out {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="particles-js"></div>
+  <div class="bg-animate"></div>
+
+  <header class="flex justify-center py-6">
+    <div class="flex justify-between items-center pb-4 border-white/10 border-b w-[90vw] lg:w-[70vw]">
+      <div class="logo">
+        <span class="font-bold text-[#a83f4c] text-xl lg:text-2xl tracking-[0.2em] special-font">TI & ME</span>
+      </div>
+      <div class="hidden md:block text-[9px] text-gray-500 lg:text-[11px] italic uppercase tracking-widest">
+        "Beautifully lethal, elegantly mysterious."
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto px-4 py-6 lg:py-10 container">
+    <div class="flex lg:flex-row flex-col justify-center items-center gap-10 lg:gap-16">
+
+      <div class="flex flex-col items-center lg:items-start space-y-6 lg:space-y-8 order-2 lg:order-1">
+        <div class="lg:text-left text-center">
+          <h2 class="mb-2 text-[#c5a059] text-5xl lg:text-8xl handwriting">Chào TiTi,</h2>
+          <p class="text-gray-400 text-sm lg:text-lg italic">
+            Anh đã thương nhớ em được...
+          </p>
+        </div>
+
+        <div class="flex gap-3 lg:gap-4">
+          <div class="flex flex-col items-center">
+            <div id="days"
+              class="flex justify-center items-center w-16 lg:w-24 h-16 lg:h-24 font-bold text-[#a83f4c] text-lg lg:text-xl timer-box special-font">
+              00</div>
+            <span class="mt-2 text-[9px] text-gray-500 uppercase tracking-[0.2em]">Ngày</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div id="hours"
+              class="flex justify-center items-center w-16 lg:w-24 h-16 lg:h-24 font-bold text-[#a83f4c] text-lg lg:text-xl timer-box special-font">
+              00</div>
+            <span class="mt-2 text-[9px] text-gray-500 uppercase tracking-[0.2em]">Giờ</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div id="minutes"
+              class="flex justify-center items-center w-16 lg:w-24 h-16 lg:h-24 font-bold text-[#a83f4c] text-lg lg:text-xl timer-box special-font">
+              00</div>
+            <span class="mt-2 text-[9px] text-gray-500 uppercase tracking-[0.2em]">Phút</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div id="seconds"
+              class="flex justify-center items-center w-16 lg:w-24 h-16 lg:h-24 font-bold text-[#a83f4c] text-lg lg:text-xl timer-box special-font">
+              00</div>
+            <span class="mt-2 text-[9px] text-gray-500 uppercase tracking-[0.2em]">Giây</span>
+          </div>
+        </div>
+
+        <div
+          class="hidden lg:block bg-white/5 p-4 border-[#722f37] border-l-2 max-w-md text-[12px] text-gray-400 italic">
+          "Dù là một bóng hồng gai góc như Ada, hay kiêu sa như Bayonetta, trong mắt anh, em vẫn là Ti đáng yêu nhất."
+        </div>
+      </div>
+
+      <div class="group relative order-1 lg:order-2 photo-frame">
+        <div class="bg-black w-[220px] lg:w-[350px] h-[300px] lg:h-[480px] overflow-hidden">
+          <img src="assets/images/ti.png" alt="Khánh Ngọc"
+            class="grayscale-[20%] group-hover:grayscale-0 w-full h-full object-cover transition-all duration-1000">
+        </div>
+        <div class="-top-3 -right-3 absolute text-gold text-xl animate-pulse">✨</div>
+        <div class="-bottom-3 -left-3 absolute text-gold text-xl animate-pulse">✨</div>
+      </div>
+    </div>
+
+    <div class="info-dock">
+      <div class="lg:hidden bg-white/20 mx-auto mb-4 rounded-full w-12 h-1.5"></div>
+
+      <p id="ti-info"
+        class="px-4 text-gray-200 text-base lg:text-xl text-center leading-relaxed tracking-wide fade-text serif-font">
+        Đang tải hồ sơ mật về nàng Ma Kết...
+      </p>
+
+      <div class="mt-4 text-center">
+        <p class="text-[#c5a059] text-[9px] uppercase tracking-[0.3em]">Sắp đến sinh nhật em:</p>
+        <p id="bday-countdown" class="mt-1 text-gray-400 text-xs special-font">-- ngày -- giờ -- phút</p>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // --- HIỆU ỨNG NỀN ---
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 20 },
+        "color": { "value": "#722f37" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.3 },
+        "size": { "value": 2 },
+        "move": { "enable": true, "speed": 0.8, "direction": "bottom" }
+      }
+    });
+
+    // --- DỮ LIỆU ---
+    const tiFacts = [
+
+      "Lần đầu tiên anh biết em là thông qua Litmatch - một account mới lập =))",
+
+      "Em sinh ngày 5/1/2004 là Ma Kết",
+
+      "Em học sư phạm Anh ở Bình Định",
+
+      "Em là người Đà Nẵng (may quá gần anh!!!)",
+
+      "Ba mẹ em khá nghiêm khắc ==!",
+
+      "Nhà em có 2 người, em và một anh trai",
+
+      "Ngoài sư phạm Anh, thì em còn học thêm tiếng Trung nữa (giỏi quá đii)",
+
+      "Ti cận tới 8 độ, hic *xót xa*",
+
+      "Em tự thấy mình là người hướng nội :>",
+
+      "Em có đi dạy thêm các trò cấp 1 nữa <3",
+
+      "Nhà em theo đạo Phật (nhà anh cũng vậy :3)",
+
+    ];
+
+    let currentFactIndex = 0;
+    const factElement = document.getElementById('ti-info');
+
+    function showNextFact() {
+      factElement.classList.add("fade-out");
+      setTimeout(() => {
+        currentFactIndex = (currentFactIndex + 1) % tiFacts.length;
+        factElement.textContent = tiFacts[currentFactIndex];
+        factElement.classList.remove("fade-out");
+      }, 600);
+    }
+    setInterval(showNextFact, 6000);
+    showNextFact();
+
+    // --- BỘ ĐẾM THỜI GIAN ---
+    const startDate = new Date('2026-01-18T19:09:00');
+
+    function updateTimer() {
+      const now = new Date();
+      const diffTime = Math.abs(now - startDate);
+
+      const d = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diffTime % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = d.toString().padStart(2, '0');
+      document.getElementById('hours').textContent = h.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = m.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = s.toString().padStart(2, '0');
+    }
+
+    // --- ĐẾM NGƯỢC SINH NHẬT ---
+    function updateBday() {
+      const now = new Date();
+      let bday = new Date(now.getFullYear(), 0, 5);
+      if (now > bday) bday.setFullYear(now.getFullYear() + 1);
+
+      const diff = bday - now;
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+      document.getElementById('bday-countdown').textContent = `${d} ngày ${h} giờ ${m} phút`;
+    }
+
+    setInterval(() => { updateTimer(); updateBday(); }, 1000);
+    updateTimer();
+    updateBday();
+  </script>
+</body>
+
+</html>

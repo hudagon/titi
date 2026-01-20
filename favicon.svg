@@ -1,0 +1,63 @@
+<svg width="220" height="150" viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient hồng chính -->
+    <linearGradient id="pinkGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FFB6C1"/>
+      <stop offset="1" stop-color="#FF69B4"/>
+    </linearGradient>
+    <!-- Gradient highlight trắng hồng -->
+    <linearGradient id="shineGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="white" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Đổ bóng mềm -->
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="160%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/>
+      <feOffset dx="0" dy="3" result="off"/>
+      <feMerge>
+        <feMergeNode in="off"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Nhóm toàn nơ (nghiêng rất nhẹ) -->
+  <g transform="translate(110,75) rotate(-6) translate(-110,-75)" filter="url(#softShadow)">
+
+    <!-- Cánh trái: dáng “trái tim” bo tròn -->
+    <path d="M28,75
+             C20,48 36,28 62,30
+             C79,31 92,40 101,52
+             C110,64 112,86 104,100
+             C95,116 77,120 60,114
+             C41,107 31,95 28,75Z"
+          fill="url(#pinkGrad)" stroke="#FF3E8D" stroke-width="4" />
+
+    <!-- Cánh phải: đối xứng nhưng hơi to hơn cho cảm giác dễ thương -->
+    <path d="M192,75
+             C200,48 184,28 158,30
+             C141,31 128,40 119,52
+             C110,64 108,86 116,100
+             C125,116 143,120 160,114
+             C179,107 189,95 192,75Z"
+          fill="url(#pinkGrad)" stroke="#FF3E8D" stroke-width="4" />
+
+    <!-- Nút giữa (oval dọc) -->
+    <ellipse cx="110" cy="75" rx="19" ry="26" fill="url(#pinkGrad)" stroke="#FF3E8D" stroke-width="4"/>
+
+    <!-- Nếp gấp bên trong cánh trái -->
+    <path d="M78,54 C70,70 70,82 78,96" fill="none" stroke="#FF3E8D" stroke-width="3" opacity="0.5"/>
+    <path d="M90,50 C82,66 82,84 90,98" fill="none" stroke="#FF3E8D" stroke-width="2" opacity="0.35"/>
+
+    <!-- Nếp gấp bên trong cánh phải -->
+    <path d="M142,54 C150,70 150,82 142,96" fill="none" stroke="#FF3E8D" stroke-width="3" opacity="0.5"/>
+    <path d="M130,50 C138,66 138,84 130,98" fill="none" stroke="#FF3E8D" stroke-width="2" opacity="0.35"/>
+
+    <!-- Highlight bóng: viền trên cánh trái & phải -->
+    <path d="M46,52 C68,44 90,46 102,58" fill="none" stroke="url(#shineGrad)" stroke-width="6" opacity="0.7"/>
+    <path d="M118,58 C130,46 152,44 174,52" fill="none" stroke="url(#shineGrad)" stroke-width="6" opacity="0.7"/>
+
+    <!-- Highlight trên nút giữa -->
+    <ellipse cx="105" cy="66" rx="8" ry="5" fill="white" opacity="0.55"/>
+  </g>
+</svg>
